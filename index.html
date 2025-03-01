@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinksBook - Innovation in Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'gradient': 'gradient 8s linear infinite',
+                        'slide-up': 'slideUp 1s ease-out',
+                        'fade-in': 'fadeIn 1.5s ease-out',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(100px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(to right, #ffffff, #a0aec0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient 8s linear infinite;
+        }
+        .tech-icon {
+            transition: all 0.3s ease;
+        }
+        .tech-icon:hover {
+            transform: translateY(-10px);
+            filter: brightness(1.2);
+        }
+        .typing-animation::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .typed-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 70px;
+            background: #fff;
+            margin-left: 8px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #101827;
+            z-index: 50;
+            padding: 5rem 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 51;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .desktop-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .tech-icon {
+                height: 3rem;
+            }
+
+            .feature-badges {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            #typed-text {
+                font-size: 2.5rem !important;
+            }
+
+            .welcome-text {
+                font-size: 1.5rem !important;
+            }
+
+            .description-text {
+                font-size: 1.1rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#101827] text-white min-h-screen">
+    
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 bg-[#101827]/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-2xl font-bold gradient-text">LinksBook</span>
+                </div>
+                <!-- Desktop Menu -->
+                <nav class="desktop-menu">
+                    <ul class="flex space-x-8">
+                        <li><a href="#" class="hover:text-gray-300 transition-colors duration-300">Home</a></li>
+                        <li><a href="#technologies" class="hover:text-gray-300 transition-colors duration-300">Technologies</a></li>
+                        <li><a href="#about" class="hover:text-gray-300 transition-colors duration-300">About</a></li>
+                        <li><a href="#contact" class="hover:text-gray-300 transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </nav>
+                <!-- Hamburger Menu Button -->
+                <button class="hamburger" id="menuBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="absolute top-6 right-6" id="closeMenuBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <nav class="flex flex-col items-center space-y-8">
+            <a href="#" class="text-2xl hover:text-gray-300 transition-colors duration-300">Home</a>
+            <a href="#technologies" class="text-2xl hover:text-gray-300 transition-colors duration-300">Technologies</a>
+            <a href="#about" class="text-2xl hover:text-gray-300 transition-colors duration-300">About</a>
+            <a href="#contact" class="text-2xl hover:text-gray-300 transition-colors duration-300">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="relative inline-block">
+                <h1 id="typed-text" class="text-7xl md:text-7xl text-4xl font-bold mb-8 gradient-text typing-animation"></h1>
+            </div>
+            <p class="welcome-text text-xl md:text-2xl text-gray-400 mb-12 animate-slide-up">
+                Welcome to LinksBook – Where Innovation Meets Development Excellence
+            </p>
+            <div class="max-w-3xl mx-auto space-y-6 animate-fade-in">
+                <p class="description-text text-lg md:text-xl text-gray-300">
+                    We're crafting a revolutionary platform for developers, designers, and tech enthusiasts.
+                    Get ready to experience the future of development.
+                </p>
+                <div class="feature-badges flex flex-col md:flex-row justify-center md:space-x-4 space-y-4 md:space-y-0 mt-8">
+                    <span class="px-6 py-3 bg-white/5 rounded-full border border-gray-700">Innovative Solutions</span>
+                    <span class="px-6 py-3 bg-white/5 rounded-full border border-gray-700">Expert Development</span>
+                    <span class="px-6 py-3 bg-white/5 rounded-full border border-gray-700">Modern Technology</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Technologies Section -->
+    <section id="technologies" class="py-12 md:py-20 bg-[#101827]">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 gradient-text">Technologies We Master</h2>
+            <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 justify-items-center">
+                <!-- Frontend -->
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="h-16 tech-icon" alt="HTML5">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="h-16 tech-icon" alt="CSS3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="h-16 tech-icon" alt="JavaScript">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" class="h-16 tech-icon" alt="TypeScript">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="h-16 tech-icon" alt="React">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" class="h-16 tech-icon" alt="Tailwind CSS">
+
+                <!-- Backend -->
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" class="h-16 tech-icon" alt="PHP">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="h-16 tech-icon" alt="Python">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg" class="h-16 tech-icon" alt="Go">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" class="h-16 tech-icon" alt="Swift">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" class="h-16 tech-icon" alt="Laravel">
+
+                <!-- Databases -->
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="h-16 tech-icon" alt="MySQL">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" class="h-16 tech-icon" alt="MongoDB">
+
+                <!-- Design Tools -->
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" class="h-16 tech-icon" alt="Figma">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" class="h-16 tech-icon" alt="Photoshop">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" class="h-16 tech-icon" alt="Illustrator">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg" class="h-16 tech-icon" alt="Adobe XD">
+
+                <!-- DevOps & Tools -->
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="h-16 tech-icon" alt="Git">
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-12 md:py-20 bg-[#101827]">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 gradient-text">About LinksBook</h2>
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-lg md:text-xl text-gray-300">
+                        LinksBook is a pioneering technology company specializing in cutting-edge web development, mobile applications, and enterprise solutions. Founded with a vision to transform digital experiences, we combine creativity with technical excellence.
+                    </p>
+                    <p class="text-lg md:text-xl text-gray-300">
+                        Our team of expert developers, designers, and technology enthusiasts works tirelessly to deliver innovative solutions that drive business growth and user satisfaction.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4 md:gap-6">
+                    <div class="p-6 bg-gray-800 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-2">100+</h3>
+                        <p class="text-gray-400">Projects Completed</p>
+                    </div>
+                    <div class="p-6 bg-gray-800 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-2">50+</h3>
+                        <p class="text-gray-400">Happy Clients</p>
+                    </div>
+                    <div class="p-6 bg-gray-800 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-2">24/7</h3>
+                        <p class="text-gray-400">Support</p>
+                    </div>
+                    <div class="p-6 bg-gray-800 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-2">15+</h3>
+                        <p class="text-gray-400">Expert Developers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 md:py-20 bg-[#101827]">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 gradient-text">Contact Us</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Email Contact -->
+                    <div class="bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-gray-800 hover:bg-white/10 transition-all duration-300">
+                        <div class="flex flex-col items-center text-center space-y-4">
+                            <div class="bg-white/5 p-4 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold">Email Us</h3>
+                            <a href="mailto:info@linksbook.com" class="text-gray-300 hover:text-white transition-colors duration-300">info@linksbook.com</a>
+                        </div>
+                    </div>
+
+                    <!-- Phone Contact -->
+                    <div class="bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-gray-800 hover:bg-white/10 transition-all duration-300">
+                        <div class="flex flex-col items-center text-center space-y-4">
+                            <div class="bg-white/5 p-4 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold">Call Us</h3>
+                            <a href="tel:+1234567890" class="text-gray-300 hover:text-white transition-colors duration-300">+1 (234) 567-890</a>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="bg-white/5 p-8 rounded-2xl backdrop-blur-sm border border-gray-800 hover:bg-white/10 transition-all duration-300">
+                        <div class="flex flex-col items-center text-center space-y-4">
+                            <div class="bg-white/5 p-4 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold">Visit Us</h3>
+                            <p class="text-gray-300">San Francisco, CA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-[#101827] border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 md:py-12">
+            <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+                <div>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <img src="1.png" alt="LinksBook Logo" class="h-10 w-auto">
+                        <span class="text-xl font-bold">LinksBook</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Transforming ideas into digital reality
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <nav>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Home</a></li>
+                            <li><a href="#technologies" class="text-gray-400 hover:text-white transition-colors duration-300">Technologies</a></li>
+                            <li><a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">About</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-300">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <img src="instagram-icon.png" alt="Instagram" class="h-6 w-6">
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <img src="telegram-icon.png" alt="Telegram" class="h-6 w-6">
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <img src="linkedin-icon.png" alt="LinkedIn" class="h-6 w-6">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>&copy; 2024 LinksBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        class TypeWriter {
+            constructor(txtElement, words, wait = 3000) {
+                this.txtElement = txtElement;
+                this.words = words;
+                this.txt = '';
+                this.wordIndex = 0;
+                this.wait = parseInt(wait, 10);
+                this.type();
+                this.isDeleting = false;
+            }
+
+            type() {
+                // Current index of word
+                const current = this.wordIndex % this.words.length;
+                // Get full text of current word
+                const fullTxt = this.words[current];
+
+                // Check if deleting
+                if(this.isDeleting) {
+                    // Remove char
+                    this.txt = fullTxt.substring(0, this.txt.length - 1);
+                } else {
+                    // Add char
+                    this.txt = fullTxt.substring(0, this.txt.length + 1);
+                }
+
+                // Insert txt into element
+                this.txtElement.innerHTML = this.txt;
+
+                // Initial Type Speed
+                let typeSpeed = 150;
+
+                if(this.isDeleting) {
+                    typeSpeed /= 2;
+                }
+
+                // If word is complete
+                if(!this.isDeleting && this.txt === fullTxt) {
+                    // Make pause at end
+                    typeSpeed = this.wait;
+                    // Set delete to true
+                    this.isDeleting = true;
+                } else if(this.isDeleting && this.txt === '') {
+                    this.isDeleting = false;
+                    // Move to next word
+                    this.wordIndex++;
+                    // Pause before start typing
+                    typeSpeed = 500;
+                }
+
+                setTimeout(() => this.type(), typeSpeed);
+            }
+        }
+
+        // Init On DOM Load
+        document.addEventListener('DOMContentLoaded', init);
+
+        // Init App
+        function init() {
+            const txtElement = document.getElementById('typed-text');
+            const words = ['Coming Soon...', 'Launching Soon...', 'Stay Tuned...'];
+            new TypeWriter(txtElement, words);
+        }
+
+        // Mobile Menu Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menuBtn');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+
+            function openMenu() {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMenu() {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            menuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openMenu();
+            });
+
+            closeMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeMenu();
+            });
+
+            // Close menu when clicking a link
+            Array.from(mobileMenuLinks).forEach(link => {
+                link.addEventListener('click', () => {
+                    closeMenu();
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (mobileMenu.classList.contains('active') && 
+                    !mobileMenu.contains(e.target) && 
+                    !menuBtn.contains(e.target)) {
+                    closeMenu();
+                }
+            });
+
+            // Prevent menu from closing when clicking inside
+            mobileMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>
